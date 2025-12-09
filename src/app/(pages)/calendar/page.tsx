@@ -39,12 +39,12 @@ export default async function CalendarPage() {
         .catch(() => notFound());
 
     return (
-        <div className="flex flex-col gap-5">
-            <div className="flex flex-col gap-4">
-                <h1 className="text-2xl font-bold text-center">
+        <div className="flex flex-col gap-8 w-full">
+            <div className="flex flex-col gap-3">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center text-gray-900">
                     {prismic.asText(page.data.calendar_tilte)}
                 </h1>
-                <p className="text-medium text-justify">
+                <p className="text-center text-gray-600 text-base md:text-lg">
                     {prismic.asText(page.data.calendar_subtitle)}
                 </p>
             </div>
