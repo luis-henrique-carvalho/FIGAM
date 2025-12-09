@@ -57,6 +57,9 @@ export default async function NewsPage() {
               const postDate = formactDate(post.last_publication_date);
               const title = prismic.asText(post.data.title);
               const description = prismic.asText(post.data.description);
+              const postData = post.data as any;
+              const authorName = postData.author_name || "FIGAM";
+              const authorPhoto = postData.author_photo?.url || "/Figam.jpeg";
 
               return (
                 <Link
@@ -87,11 +90,25 @@ export default async function NewsPage() {
                       {description.substring(0, 150) || ""}...
                     </p>
 
-                    {/* Footer */}
+                    {/* Footer with Author and Date */}
                     <div className="flex items-center justify-between pt-3 mt-auto border-t border-gray-200">
-                      <time className="text-xs md:text-sm text-gray-500 font-medium">
-                        {postDate}
-                      </time>
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-6 h-6 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                          <img
+                            src={authorPhoto}
+                            alt={authorName}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <p className="text-xs text-gray-700 font-medium">
+                            {authorName}
+                          </p>
+                          <time className="text-xs text-gray-500">
+                            {postDate}
+                          </time>
+                        </div>
+                      </div>
                       <span className="text-sm font-bold text-primary group-hover:text-primary/80 transition-colors flex items-center gap-1">
                         Ler mais
                         <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">

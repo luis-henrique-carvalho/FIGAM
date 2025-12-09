@@ -23,11 +23,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={notoSerif.className}>
         <Providers>
-          <NavBar />
-          <Container>
-            {children}
+          <div className="flex flex-col min-h-screen">
+            <NavBar />
+            <Container>
+              {children}
+            </Container>
             <Footer />
-          </Container>
+          </div>
         </Providers>
       </body>
     </html>
