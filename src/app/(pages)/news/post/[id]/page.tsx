@@ -59,6 +59,11 @@ export default async function PostPage({ params }: { params: Params }) {
 
     const postDate = formactDate(post.last_publication_date);
 
+    // Author defaults
+    const authorName = post.data.author_name || "FIGAM";
+    const authorTitle = post.data.author_title || "Fundação Iraci Gama de Cultura";
+    const authorPhoto = post.data.author_photo?.url || "/Figam.jpeg"; // Você pode ajustar o caminho da logo padrão
+
     // Rich text components with blog-style formatting for better readability
     const components: JSXMapSerializer = {
         heading1: ({ children }) => (
@@ -185,6 +190,28 @@ export default async function PostPage({ params }: { params: Params }) {
                             </figcaption>
                         )}
                     </figure>
+
+                    {/* Author Section */}
+                    <div className="flex items-center gap-4 py-6 border-y border-gray-200">
+                        <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                            <img
+                                src={authorPhoto}
+                                alt={authorName}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <p className="text-xs md:text-sm text-gray-500 uppercase tracking-wider">
+                                Escrito por
+                            </p>
+                            <h3 className="text-base md:text-lg font-bold text-gray-900">
+                                {authorName}
+                            </h3>
+                            <p className="text-sm md:text-base text-gray-600">
+                                {authorTitle}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </header>
 

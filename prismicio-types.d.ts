@@ -1150,6 +1150,39 @@ interface PostDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * Author Name field in *Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Nome do autor
+   * - **API ID Path**: post.author_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author_name: prismic.KeyTextField;
+
+  /**
+   * Author Title field in *Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Cargo/Título do autor
+   * - **API ID Path**: post.author_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  author_title: prismic.KeyTextField;
+
+  /**
+   * Author Photo field in *Post*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: post.author_photo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  author_photo: prismic.ImageField<never>;
 }
 
 /**
