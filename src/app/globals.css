@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .text-h1 {
+    @apply font-serif text-black text-xl leading-normal md:text-3xl lg:text-4xl;
+  }
+
+  .text-paragraph-base {
+    @apply font-light text-black text-base;
+  }
+}
+
+.hover\:size:hover {
+  transform: scale(1.1);
+  /* Aumenta em 10% (1 + 0.1) */
+}
+
+.hover\:size-5:hover {
+  transform: scale(1.02);
+  /* Aumenta em 5% (1 + 0.05) */
+}

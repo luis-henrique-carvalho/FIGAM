@@ -1,0 +1,63 @@
+{
+  "id": "event_card",
+  "type": "SharedSlice",
+  "name": "EventCard",
+  "description": "EventCard",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "event_image": {
+          "type": "Image",
+          "config": {
+            "label": "event_image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "event_title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "event_title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "event_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "event_text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "event_date": {
+          "type": "StructuredText",
+          "config": {
+            "label": "event_date",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        }
+      },
+      "items": {
+        "event_image": {
+          "type": "Image",
+          "config": {
+            "label": "event_image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      }
+    }
+  ]
+}

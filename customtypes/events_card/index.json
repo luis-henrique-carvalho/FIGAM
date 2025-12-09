@@ -1,0 +1,59 @@
+{
+  "id": "events_card",
+  "label": "Events_card",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "event_image": {
+        "type": "Image",
+        "config": {
+          "label": "event_image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "event_title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "event_title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "event_text": {
+        "type": "StructuredText",
+        "config": {
+          "label": "event_text",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "event_date": {
+        "type": "Date",
+        "config": {
+          "label": "event_date",
+          "placeholder": ""
+        }
+      },
+      "register_link": {
+        "type": "Link",
+        "config": {
+          "label": "register_link",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "select": null
+        }
+      }
+    }
+  }
+}

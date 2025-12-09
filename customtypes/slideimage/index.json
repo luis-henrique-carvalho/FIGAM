@@ -1,0 +1,32 @@
+{
+  "id": "slideimage",
+  "label": "slideImage",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "title": {
+        "type": "Group",
+        "config": {
+          "label": "title",
+          "fields": {}
+        }
+      }
+    }
+  }
+}

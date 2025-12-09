@@ -1,0 +1,63 @@
+{
+  "id": "document",
+  "type": "SharedSlice",
+  "name": "Document",
+  "description": "Document",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "type": {
+          "type": "Select",
+          "config": {
+            "label": "type",
+            "placeholder": "",
+            "options": [
+              "Ofício",
+              "Prestação de Contas"
+            ],
+            "default_value": "Ofício"
+          }
+        }
+      },
+      "items": {
+        "annex": {
+          "type": "Link",
+          "config": {
+            "label": "Annex",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "annex_title": {
+          "type": "Text",
+          "config": {
+            "label": "Annex Title",
+            "placeholder": ""
+          }
+        }
+      }
+    }
+  ]
+}
