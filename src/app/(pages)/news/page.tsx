@@ -4,6 +4,8 @@ import { createClient } from "@/prismicio";
 import Link from "next/link";
 import { formactDate } from "@/helpers/formactDate";
 
+const ITEMS_PER_PAGE = 9;
+
 /**
  * Generate metadata for the News page
  */
@@ -21,15 +23,27 @@ export async function generateMetadata(): Promise<Metadata> {
 /**
  * News page component - Lists all posts
  */
-export default async function NewsPage() {
+export default async function NewsPage({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}) {
   const client = createClient();
 
-  // Fetch all posts ordered by publication date
-  const posts = await client.getAllByType("post", {
+  // Get current page from query params
+  const currentPage = Number(searchParams.page) || 1;
+
+  // Fetch posts with pagination
+  const postsResponse = await client.getByType("post", {
+    page: currentPage,
+    pageSize: ITEMS_PER_PAGE,
     orderings: [
       { field: "document.first_publication_date", direction: "desc" },
     ],
   });
+
+  const posts = postsResponse.results;
+  const totalPages = postsResponse.total_pages;
 
   return (
     <div className="flex flex-col gap-8 w-full">
@@ -123,6 +137,47 @@ export default async function NewsPage() {
           </div>
         )}
       </section>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {/* Previous Button */}
+          {currentPage > 1 && (
+            <Link
+              href={`?page=${currentPage - 1}`}
+              className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80 transition-colors"
+            >
+              Anterior
+            </Link>
+          )}
+
+          {/* Page Numbers */}
+          <div className="flex gap-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+              <Link
+                key={pageNum}
+                href={`?page=${pageNum}`}
+                className={`px-4 py-2 rounded-md transition-colors ${pageNum === currentPage
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+              >
+                {pageNum}
+              </Link>
+            ))}
+          </div>
+
+          {/* Next Button */}
+          {currentPage < totalPages && (
+            <Link
+              href={`?page=${currentPage + 1}`}
+              className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80 transition-colors"
+            >
+              Próxima
+            </Link>
+          )}
+        </div>
+      )}
     </div>
   );
 }

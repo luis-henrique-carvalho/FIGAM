@@ -1,26 +1,19 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { createClient } from "@/prismicio";
 import EventCardItem from "@/components/EventCardItem";
 
 /**
  * Props for `EventCard`.
  */
-export type EventCardProps = SliceComponentProps<Content.EventCardSlice>;
+export type EventCardProps = SliceComponentProps<Content.EventCardSlice, { events?: any[] }>;
 
 /**
  * Component for "EventCard" Slices.
- * This slice fetches and displays a list of events from Prismic.
+ * This slice displays a list of events passed from the page context.
  */
-const EventCard = async ({ slice }: EventCardProps): Promise<JSX.Element> => {
-  const client = createClient();
-
-  // Fetch all events ordered by date
-  const events = await client.getAllByType("events_card", {
-    orderings: [
-      { field: "my.events_card.event_date", direction: "desc" },
-    ],
-  });
+const EventCard = async ({ slice, context }: EventCardProps): Promise<JSX.Element> => {
+  // Get events from context (passed from the page)
+  const events = context?.events || [];
 
   return (
     <section
