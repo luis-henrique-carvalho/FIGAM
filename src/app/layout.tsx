@@ -7,6 +7,7 @@ import Container from "@/components/Container";
 import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 const notoSerif = Noto_Serif({ subsets: ["latin"] });
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Fundação Iraci Gama",
@@ -31,6 +32,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
