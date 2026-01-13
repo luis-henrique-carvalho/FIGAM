@@ -14,6 +14,7 @@
     "@prismicio/client": "^7.3.1",
     "@prismicio/next": "^1.5.0",
     "@prismicio/react": "^2.7.3",
+    "@vercel/analytics": "^1.6.1",
     "framer-motion": "^10.16.14",
     "next": "14.2.35",
     "pathe": "^1.1.1",
