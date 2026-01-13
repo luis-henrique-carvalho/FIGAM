@@ -26,13 +26,13 @@ const NavBar = () => {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <Image src={"/Figam.jpeg"} alt="FIGAM" width="150" height="150" />
+          <Image src={"/Figam.jpeg"} alt="FIGAM" width="150" height="150" unoptimized />
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="start">
         <NavbarBrand>
-          <Image src={"/Figam.jpeg"} alt="FIGAM" width="150" height="150" />
+          <Image src={"/Figam.jpeg"} alt="FIGAM" width="150" height="150" unoptimized />
         </NavbarBrand>
       </NavbarContent>
 

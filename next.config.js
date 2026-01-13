@@ -1,14 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ["images.prismic.io"],
         remotePatterns: [
             {
                 protocol: "https",
                 hostname: "images.prismic.io",
-                port: "",
             },
         ],
+        formats: ["image/webp"],
+        minimumCacheTTL: 2678400,
+        deviceSizes: [640, 1080, 1920],
+        imageSizes: [128, 256, 384],
     },
 }
 

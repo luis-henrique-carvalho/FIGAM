@@ -27,8 +27,8 @@ const CustomImageScroll: React.FC<CustomImageScrollProps> = ({
           <Image
             src={src}
             fill
-            objectFit="cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 192px, 300px"
             alt={alt}
           />
         </figure>
