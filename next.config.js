@@ -1,16 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
+        // Desabilita otimização da Vercel - usa Prismic CDN diretamente
+        unoptimized: true,
         remotePatterns: [
             {
                 protocol: "https",
                 hostname: "images.prismic.io",
             },
         ],
-        formats: ["image/webp"],
-        minimumCacheTTL: 2678400,
-        deviceSizes: [640, 1080, 1920],
-        imageSizes: [128, 256, 384],
     },
 }
 
