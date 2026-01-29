@@ -1,0 +1,57 @@
+{
+  "id": "visit_card",
+  "label": "Visit_card",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "visit_image": {
+        "type": "Image",
+        "config": {
+          "label": "visit_image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "visit_title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "visit_title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "visit_date": {
+        "type": "Date",
+        "config": {
+          "label": "visit_date",
+          "placeholder": ""
+        }
+      },
+      "visit_content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "visit_content",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    }
+  }
+}
