@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import * as prismic from "@prismicio/client";
 import { PrismicRichText, PrismicLink, JSXMapSerializer } from "@prismicio/react";
 
@@ -10,19 +10,19 @@ import { formactDate } from "@/helpers/formactDate";
 type Params = { id: string };
 
 /**
- * Generate static paths for all events
+ * Generate static paths for all visits
  */
 export async function generateStaticParams() {
     const client = createClient();
-    const events = await client.getAllByType("events_card");
+    const visits = await client.getAllByType("visit_card");
 
-    return events.map((event) => ({
-        id: event.uid,
+    return visits.map((visit) => ({
+        id: visit.uid,
     }));
 }
 
 /**
- * Generate metadata for the event page
+ * Generate metadata for the visit page
  */
 export async function generateMetadata({
     params,
@@ -30,18 +30,18 @@ export async function generateMetadata({
     params: Params;
 }): Promise<Metadata> {
     const client = createClient();
-    const event = await client
-        .getByUID("events_card", params.id)
+    const visit = await client
+        .getByUID("visit_card", params.id)
         .catch(() => notFound());
 
     return {
-        title: prismic.asText(event.data.event_title),
-        description: prismic.asText(event.data.event_text).substring(0, 160),
+        title: prismic.asText(visit.data.visit_title),
+        description: prismic.asText(visit.data.visit_content).substring(0, 160),
         openGraph: {
-            title: prismic.asText(event.data.event_title),
+            title: prismic.asText(visit.data.visit_title),
             images: [
                 {
-                    url: event.data.event_image.url || "",
+                    url: visit.data.visit_image.url || "",
                 },
             ],
         },
@@ -49,17 +49,16 @@ export async function generateMetadata({
 }
 
 /**
- * Event detail page component
+ * visit detail page component
  * Blog-style layout with focus on image, title and rich text content
  */
-export default async function EventPage({ params }: { params: Params }) {
+export default async function visitPage({ params }: { params: Params }) {
     const client = createClient();
-    const event = await client
-        .getByUID("events_card", params.id)
+    const visit = await client
+        .getByUID("visit_card", params.id)
         .catch(() => notFound());
 
-    const eventDate = formactDate(event.data.event_date);
-
+    const visitDate = formactDate(visit.data.visit_date);
     // Rich text components with blog-style formatting
     const components: JSXMapSerializer = {
         heading1: ({ children }) => (
@@ -102,9 +101,10 @@ export default async function EventPage({ params }: { params: Params }) {
                 <Image
                     src={node.url}
                     alt={node.alt || ""}
+                    className="w-full rounded-lg shadow-lg"
                     width={800}
                     height={600}
-                    className="w-full rounded-lg shadow-lg"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 900px"
                 />
                 {node.alt && (
                     <figcaption className="text-sm text-gray-500 text-center mt-3 italic">
@@ -152,8 +152,6 @@ export default async function EventPage({ params }: { params: Params }) {
         ),
     };
 
-    const hasRegisterLink =
-        event.data.register_link && event.data.register_link.link_type !== "Any";
 
     return (
         <article className="w-full">
@@ -163,89 +161,49 @@ export default async function EventPage({ params }: { params: Params }) {
                     {/* Category/Date Badge */}
                     <div className="mb-4">
                         <time className="inline-block bg-primary text-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
-                            {eventDate}
+                            {visitDate}
                         </time>
                     </div>
 
                     {/* Title */}
                     <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                        {prismic.asText(event.data.event_title)}
+                        {prismic.asText(visit.data.visit_title)}
                     </h1>
 
                     {/* Subtitle/Description - First paragraph from rich text if available */}
                     <div className="text-lg md:text-xl text-gray-600 font-normal mb-8 leading-relaxed">
-                        {prismic.asText(event.data.event_text).substring(0, 200)}...
+                        {prismic.asText(visit.data.visit_content).substring(0, 200)}...
                     </div>
 
                     {/* Featured Image */}
                     <figure className="w-full mb-6">
                         <Image
-                            src={event.data.event_image.url as string}
-                            alt={event.data.event_image.alt as string}
-                            width={1200}
-                            height={800}
+                            src={visit.data.visit_image.url as string}
+                            alt={visit.data.visit_image.alt as string}
                             className="w-full h-auto object-cover rounded-sm"
+                            width={1200}
+                            height={675}
+                            priority
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                         />
-                        {event.data.event_image.alt && (
+                        {visit.data.visit_image.alt && (
                             <figcaption className="text-sm text-gray-500 mt-3 leading-relaxed">
-                                {event.data.event_image.alt}
+                                {visit.data.visit_image.alt}
                             </figcaption>
                         )}
                     </figure>
 
-                    {/* Register button */}
-                    {hasRegisterLink && (
-                        <div className="mb-8 pb-8 border-b border-gray-200">
-                            <PrismicLink field={event.data.register_link}>
-                                <button className="bg-primary hover:bg-primary/90 text-white font-bold text-base px-8 py-3 rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2">
-                                    <svg
-                                        className="w-5 h-5"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    Inscreva-se neste evento
-                                </button>
-                            </PrismicLink>
-                        </div>
-                    )}
                 </div>
             </header>
 
             {/* Content Section */}
-            <main className="max-w-5xl mx-auto  lg:px-8">
+            <main className="max-w-5xl mx-auto px-4 lg:px-8">
                 {/* Rich Text Content */}
                 <div className="prose prose-lg max-w-none">
-                    <PrismicRichText field={event.data.event_text} components={components} />
+                    <PrismicRichText field={visit.data.visit_content} components={components} />
                 </div>
 
-                {/* Bottom Register CTA */}
-                {hasRegisterLink && (
-                    <div className="mt-12 mb-8 p-6 bg-gray-50 border-l-4 border-primary">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                            <div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                                    Gostou do evento?
-                                </h3>
-                                <p className="text-gray-600">
-                                    Não perca a oportunidade de participar!
-                                </p>
-                            </div>
-                            <PrismicLink field={event.data.register_link}>
-                                <button className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3 rounded-md shadow-md hover:shadow-lg transition-all duration-300 whitespace-nowrap">
-                                    Inscreva-se agora
-                                </button>
-                            </PrismicLink>
-                        </div>
-                    </div>
-                )}
+
             </main>
         </article>
     );

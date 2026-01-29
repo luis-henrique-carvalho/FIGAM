@@ -46,6 +46,14 @@ const routes: prismic.ClientConfig["routes"] = [
     type: "accountability",
     path: "/accountability",
   },
+  {
+    type: "visits_page",
+    path: "/visits",
+  },
+  {
+    type: "visit_card",
+    path: "/visits/:uid",
+  },
 ];
 
 /**
