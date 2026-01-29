@@ -36,31 +36,6 @@
           "placeholder": ""
         }
       },
-      "visit_institution": {
-        "type": "Text",
-        "config": {
-          "label": "visit_institution",
-          "placeholder": "Name of the institution visited"
-        }
-      },
-      "visit_description": {
-        "type": "StructuredText",
-        "config": {
-          "label": "visit_description",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "visit_activities": {
-        "type": "StructuredText",
-        "config": {
-          "label": "visit_activities",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
       "visit_content": {
         "type": "StructuredText",
         "config": {

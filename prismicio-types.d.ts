@@ -1362,39 +1362,6 @@ interface VisitCardDocumentData {
   visit_date: prismic.DateField;
 
   /**
-   * visit_institution field in *Visit_card*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Name of the institution visited
-   * - **API ID Path**: visit_card.visit_institution
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  visit_institution: prismic.KeyTextField;
-
-  /**
-   * visit_description field in *Visit_card*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: visit_card.visit_description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  visit_description: prismic.RichTextField;
-
-  /**
-   * visit_activities field in *Visit_card*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: visit_card.visit_activities
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  visit_activities: prismic.RichTextField;
-
-  /**
    * visit_content field in *Visit_card*
    *
    * - **Field Type**: Rich Text

@@ -62,11 +62,12 @@ const NavBar = () => {
             Visitas
           </Link>
         </NavbarItem>
-        <NavbarItem>
+        {/* TODO: add transparency */}
+        {/* <NavbarItem>
           <Link color="foreground" href="/accountability">
             Transparência
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       <NavbarContent justify="end">

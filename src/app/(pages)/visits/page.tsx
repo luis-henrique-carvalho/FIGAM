@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { SliceZone } from "@prismicio/react";
 import * as prismic from "@prismicio/client";
 import Link from "next/link";
@@ -96,7 +97,6 @@ export default async function VisitsPage({
             {visits.map((visit) => {
               const visitDate = formactDate(visit.data.visit_date);
               const title = prismic.asText(visit.data.visit_title);
-              const description = prismic.asText(visit.data.visit_description);
 
               return (
                 <Link
@@ -107,40 +107,29 @@ export default async function VisitsPage({
                   {/* Image */}
                   {visit.data.visit_image.url && (
                     <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-64 overflow-hidden bg-gray-200">
-                      <img
+                      <Image
                         src={visit.data.visit_image.url as string}
                         alt={visit.data.visit_image.alt as string || title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   )}
 
+
                   {/* Content */}
                   <div className="flex flex-col flex-grow p-4 md:p-5 gap-3">
-                    {/* Institution Badge */}
-                    <div className="inline-flex items-center gap-2 text-xs md:text-sm font-medium text-primary bg-primary/10 rounded-full px-3 py-1 w-fit">
-                      <svg
-                        className="w-3 h-3 md:w-4 md:h-4"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M10.5 1.5H3.75A2.25 2.25 0 001.5 3.75v12.5A2.25 2.25 0 003.75 18.5h12.5a2.25 2.25 0 002.25-2.25V9.5" />
-                        <path d="M6.5 8h7M6.5 11h7M6.5 14h3" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                      </svg>
-                      {visit.data.visit_institution || "Visita"}
-                    </div>
 
                     {/* Title */}
                     <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-900 line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-200">
                       {title || "Sem título"}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-sm md:text-base text-gray-600 line-clamp-3 flex-grow leading-relaxed">
-                      {description.substring(0, 150) || ""}...
-                    </p>
+                     <p className="text-sm md:text-base text-gray-600 line-clamp-3 flex-grow leading-relaxed">
+                      {prismic.asText(visit.data.visit_content).substring(0, 150) || ""}...
+                      </p>
 
                     {/* Footer with Date */}
                     <div className="flex items-center justify-between pt-3 mt-auto border-t border-gray-200">
