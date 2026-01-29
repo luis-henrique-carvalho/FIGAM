@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import * as prismic from "@prismicio/client";
 import { PrismicRichText, PrismicLink, JSXMapSerializer } from "@prismicio/react";
@@ -98,11 +99,12 @@ export default async function EventPage({ params }: { params: Params }) {
         ),
         image: ({ node }) => (
             <figure className="my-8 lg:my-12">
-                <img
+                <Image
                     src={node.url}
                     alt={node.alt || ""}
+                    width={800}
+                    height={600}
                     className="w-full rounded-lg shadow-lg"
-                    loading="lazy"
                 />
                 {node.alt && (
                     <figcaption className="text-sm text-gray-500 text-center mt-3 italic">
@@ -157,7 +159,7 @@ export default async function EventPage({ params }: { params: Params }) {
         <article className="w-full">
             {/* Hero Section */}
             <header className="w-full mb-12 lg:mb-16">
-                <div className="max-w-5xl mx-auto px-4 lg:px-8">
+                <div className="max-w-5xl mx-auto lg:px-8">
                     {/* Category/Date Badge */}
                     <div className="mb-4">
                         <time className="inline-block bg-primary text-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
@@ -177,9 +179,11 @@ export default async function EventPage({ params }: { params: Params }) {
 
                     {/* Featured Image */}
                     <figure className="w-full mb-6">
-                        <img
+                        <Image
                             src={event.data.event_image.url as string}
                             alt={event.data.event_image.alt as string}
+                            width={1200}
+                            height={800}
                             className="w-full h-auto object-cover rounded-sm"
                         />
                         {event.data.event_image.alt && (
@@ -216,7 +220,7 @@ export default async function EventPage({ params }: { params: Params }) {
             </header>
 
             {/* Content Section */}
-            <main className="max-w-5xl mx-auto px-4 lg:px-8">
+            <main className="max-w-5xl mx-auto  lg:px-8">
                 {/* Rich Text Content */}
                 <div className="prose prose-lg max-w-none">
                     <PrismicRichText field={event.data.event_text} components={components} />

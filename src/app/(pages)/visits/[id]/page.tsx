@@ -157,7 +157,7 @@ export default async function visitPage({ params }: { params: Params }) {
         <article className="w-full">
             {/* Hero Section */}
             <header className="w-full mb-12 lg:mb-16">
-                <div className="max-w-5xl mx-auto px-4 lg:px-8">
+                <div className="max-w-5xl mx-auto lg:px-8">
                     {/* Category/Date Badge */}
                     <div className="mb-4">
                         <time className="inline-block bg-primary text-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider">

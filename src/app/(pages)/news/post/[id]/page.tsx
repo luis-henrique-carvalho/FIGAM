@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import * as prismic from "@prismicio/client";
 import { PrismicRichText, JSXMapSerializer } from "@prismicio/react";
@@ -103,11 +104,12 @@ export default async function PostPage({ params }: { params: Params }) {
         ),
         image: ({ node }) => (
             <figure className="my-8 lg:my-12">
-                <img
+                <Image
                     src={node.url}
                     alt={node.alt || ""}
+                    width={800}
+                    height={600}
                     className="w-full rounded-lg shadow-lg"
-                    loading="lazy"
                 />
                 {node.alt && (
                     <figcaption className="text-sm text-gray-500 text-center mt-3 italic">
@@ -159,7 +161,7 @@ export default async function PostPage({ params }: { params: Params }) {
         <article className="w-full">
             {/* Hero Section */}
             <header className="w-full mb-12 lg:mb-16">
-                <div className="max-w-5xl mx-auto px-4 lg:px-8">
+                <div className="max-w-5xl mx-auto lg:px-8">
                     {/* Date Badge */}
                     <div className="mb-4">
                         <time className="inline-block bg-primary text-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
@@ -179,9 +181,11 @@ export default async function PostPage({ params }: { params: Params }) {
 
                     {/* Featured Image */}
                     <figure className="w-full mb-6">
-                        <img
+                        <Image
                             src={post.data.cover.url as string}
                             alt={post.data.cover.alt as string}
+                            width={1200}
+                            height={800}
                             className="w-full h-auto object-cover rounded-sm"
                         />
                         {post.data.cover.alt && (
@@ -194,9 +198,11 @@ export default async function PostPage({ params }: { params: Params }) {
                     {/* Author Section */}
                     <div className="flex items-center gap-4 py-6 border-y border-gray-200">
                         <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
-                            <img
+                            <Image
                                 src={authorPhoto}
                                 alt={authorName}
+                                width={80}
+                                height={80}
                                 className="w-full h-full object-cover"
                             />
                         </div>
