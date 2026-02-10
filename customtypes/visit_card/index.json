@@ -52,6 +52,30 @@
           "choices": {}
         }
       }
+    },
+    "SEO & Metadata": {
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description",
+          "placeholder": ""
+        }
+      },
+      "meta_image": {
+        "type": "Image",
+        "config": {
+          "label": "Meta Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Title",
+          "placeholder": ""
+        }
+      }
     }
   }
 }

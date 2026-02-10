@@ -34,16 +34,53 @@ export async function generateMetadata({
         .getByUID("visit_card", params.id)
         .catch(() => notFound());
 
+        console.log(visit.data.meta_title)
+
+    const metaTitle = visit.data.meta_title?.trim()
+        ? visit.data.meta_title
+        : prismic.asText(visit.data.visit_title);
+    const metaDescription = visit.data.meta_description?.trim()
+        ? visit.data.meta_description
+        : prismic.asText(visit.data.visit_content).substring(0, 160);
+    const metaImage = visit.data.meta_image?.url
+        ? visit.data.meta_image
+        : visit.data.visit_image;
+    const metaImageWidth = metaImage?.dimensions?.width || 1200;
+    const metaImageHeight = metaImage?.dimensions?.height || 630;
+
+    console.log("Generated metadata:", {
+        title: metaTitle,
+        description: metaDescription,
+        image: metaImage?.url,
+    });
+
     return {
-        title: prismic.asText(visit.data.visit_title),
-        description: prismic.asText(visit.data.visit_content).substring(0, 160),
+        title: metaTitle,
+        description: metaDescription,
         openGraph: {
-            title: prismic.asText(visit.data.visit_title),
-            images: [
-                {
-                    url: visit.data.visit_image.url || "",
-                },
-            ],
+            type: "article",
+            locale: "pt_BR",
+            title: metaTitle,
+            description: metaDescription,
+            images: metaImage?.url
+                ? [
+                      {
+                          url: metaImage.url,
+                          width: metaImageWidth,
+                          height: metaImageHeight,
+                          alt: metaImage.alt || metaTitle,
+                          type: metaImage.url.endsWith(".png")
+                              ? "image/png"
+                              : "image/jpeg",
+                      },
+                  ]
+                : [],
+        },
+        twitter: {
+            card: metaImage?.url ? "summary_large_image" : "summary",
+            title: metaTitle,
+            description: metaDescription,
+            images: metaImage?.url ? [metaImage.url] : [],
         },
     };
 }
@@ -59,6 +96,13 @@ export default async function visitPage({ params }: { params: Params }) {
         .catch(() => notFound());
 
     const visitDate = formactDate(visit.data.visit_date);
+    const subtitle = visit.data.visit_content?.length
+        ? prismic.asText(visit.data.visit_content.slice(0, 1) as prismic.RichTextField) || ""
+        : "";
+    const contentWithoutSubtitle = visit.data.visit_content?.slice(1);
+    const mainContent = contentWithoutSubtitle?.length
+        ? (contentWithoutSubtitle as prismic.RichTextField)
+        : null;
     // Rich text components with blog-style formatting
     const components: JSXMapSerializer = {
         heading1: ({ children }) => (
@@ -172,7 +216,7 @@ export default async function visitPage({ params }: { params: Params }) {
 
                     {/* Subtitle/Description - First paragraph from rich text if available */}
                     <div className="text-lg md:text-xl text-gray-600 font-normal mb-8 leading-relaxed">
-                        {prismic.asText(visit.data.visit_content).substring(0, 200)}...
+                        {subtitle}
                     </div>
 
                     {/* Featured Image */}
@@ -200,7 +244,7 @@ export default async function visitPage({ params }: { params: Params }) {
             <main className="max-w-5xl mx-auto px-4 lg:px-8">
                 {/* Rich Text Content */}
                 <div className="prose prose-lg max-w-none">
-                    <PrismicRichText field={visit.data.visit_content} components={components} />
+                    <PrismicRichText field={mainContent} components={components} />
                 </div>
 
 
